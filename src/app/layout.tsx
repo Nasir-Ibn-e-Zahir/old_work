@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono,Barlow } from "next/font/google";
 import "./globals.css";
+import { ThemeProvider } from "next-themes";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -11,6 +12,12 @@ const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
 });
+
+const barlow = Barlow({
+  subsets:['latin'],
+  weight:['500','700'],
+  variable: '--font-barlow'
+})
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -23,11 +30,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${barlow.variable}  antialiased`}
       >
-        {children}
+       <ThemeProvider
+       attribute={'class'}
+       defaultTheme="system"
+       disableTransitionOnChange
+       enableSystem
+       >
+       {children}
+       </ThemeProvider>
       </body>
     </html>
   );
