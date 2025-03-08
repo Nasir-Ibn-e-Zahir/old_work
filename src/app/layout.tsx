@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono,Barlow } from "next/font/google";
+import { Geist, Barlow } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "next-themes";
 import {
@@ -16,10 +16,10 @@ const geistSans = Geist({
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+// const geistMono = Geist_Mono({
+//   variable: "--font-geist-mono",
+//   subsets: ["latin"],
+// });
 
 const barlow = Barlow({
   subsets:['latin'],
@@ -41,7 +41,7 @@ export default function RootLayout({
     <ClerkProvider>
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${barlow.variable}  antialiased`}
+        className={`${geistSans.variable}  ${barlow.variable}  antialiased`}
       >
        <ThemeProvider
        attribute={'class'}
