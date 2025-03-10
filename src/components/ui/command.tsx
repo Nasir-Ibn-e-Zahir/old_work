@@ -16,7 +16,7 @@ import {
 function Command({
   className,
   ...props
-}: React.ComponentProps<typeof CommandPrimitive>) {
+}: React.ComponentPropsWithoutRef<typeof CommandPrimitive>) {
   return (
     <CommandPrimitive
       data-slot="command"

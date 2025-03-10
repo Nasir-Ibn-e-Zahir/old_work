@@ -33,17 +33,17 @@ export async function POST(req: Request) {
   let rawBody;
   try {
     rawBody = await req.text(); // Use `req.text()` instead of `req.json()`
-    console.log("✅ Raw body received:", rawBody);
+    // console.log("✅ Raw body received:", rawBody);
   } catch (error) {
     console.error("❌ Error reading request body:", error);
     return new Response("Error: Invalid request body", { status: 400 });
   }
 
   // Parse JSON manually
-  let payload;
+  // let payload;
   try {
-    payload = JSON.parse(rawBody);
-    console.log("✅ Parsed JSON:", payload);
+    // payload = JSON.parse(rawBody);
+    // console.log("✅ Parsed JSON:", payload);
   } catch (error) {
     console.error("❌ Error parsing JSON:", error);
     return new Response("Error: Invalid JSON", { status: 400 });
@@ -70,9 +70,9 @@ export async function POST(req: Request) {
   // This is when User is created or Updated
   if (evt.type === "user.created" || evt.type === "user.updated") {
     // console.log("✅ User ID:", evt.data.id);
-    console.log("✅ User Data:", evt.data);
+    // console.log("✅ User Data:", evt.data);
     const data = evt.data;
-    let user: Partial<User> = {
+    const user: Partial<User> = {
       id: data.id,
       email: data.email_addresses[0].email_address,
       picture: data.image_url,
@@ -96,8 +96,9 @@ export async function POST(req: Request) {
         role: user.role || "USER"
       }
     });
-    await clerkClient.users.updateUser(data.id,{
-      PrivateMetadata:{
+    const client = await clerkClient();
+    await client.users.updateUser(data.id,{
+      privateMetadata:{
         role: dbUser.role || "USER"
       }
     })
